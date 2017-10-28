@@ -6,28 +6,63 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Collections;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
+ * This class represents a Ride in our application.
  * Created by Šimon on 25.10.2017.
  */
 
 @Entity
 public class Ride {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    @NotNull
     private LocalDateTime departure;
+
+    @NotNull
     private double price;
+
+    @NotNull
     private int availableSeats;
+
+    @NotNull
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Driver driver;
+
+
     private Set<Passenger> passengers;
+
+    @NotNull
     private City sourceCity;
+
+    @NotNull
     private City destinationCity;
+
     private Set<Comment> comments;
 
+
+    /**
+     * Default Constructor
+     */
     public Ride() {
     }
 
+    /**
+     * Constructor
+     * @param rideId id
+     */
+    public Ride(Long rideId) {
+        this.id = rideId;
+    }
 
-// setters
+
+    // setters
     public void setDeparture(LocalDateTime dep){
         this.departure = dep;
     }
@@ -60,7 +95,7 @@ public class Ride {
         this.comments.add(c);
     }
 
-// getters
+    // getters
     public LocalDateTime getDeparture(){
         return this.departure
     }
@@ -78,7 +113,7 @@ public class Ride {
     }
 
     public Set<Passenger> getPassengers(){
-        return Collections.unmodifiableSet(passengers);
+        return passengers;                          //return Collections.unmodifiableSet(passengers);
     }
 
     public City getSourceCity(){
@@ -90,7 +125,7 @@ public class Ride {
     }
 
     public Set<Comment> getComments(){
-        return Collections.unmodifiableSet(comments);
+        return comments;                           //return Collections.unmodifiableSet(comments);
     }
 
 
