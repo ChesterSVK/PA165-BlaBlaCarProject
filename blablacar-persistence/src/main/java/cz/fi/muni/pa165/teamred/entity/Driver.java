@@ -71,8 +71,7 @@ public class Driver extends User {
         if (!(o instanceof Driver)) return false;
 
         Driver other = (Driver) o;
-        boolean carB = Objects.equals(carDescription, other.getCarDescription());
-        boolean noteB = Objects.equals(note, other.getNote());
+ 
         return Objects.equals(carDescription, other.getCarDescription()) && Objects.equals(note, other.getNote());
     }
 
