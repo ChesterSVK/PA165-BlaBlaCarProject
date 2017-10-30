@@ -18,12 +18,18 @@ public class PlaceDaoImpl implements PlaceDao {
     private EntityManager em;
 
     @Override
-    public void create(Place place) {
+    public void create(Place place) throws IllegalArgumentException {
+        if (place == null) {
+            throw new IllegalArgumentException("Place is null.");
+        }
         em.persist(place);
     }
 
     @Override
-    public void delete(Place place) {
+    public void delete(Place place) throws IllegalArgumentException {
+        if (place == null) {
+            throw new IllegalArgumentException("Place is null.");
+        }
         em.remove(em.contains(place) ? place : em.merge(place));
     }
 
@@ -33,12 +39,19 @@ public class PlaceDaoImpl implements PlaceDao {
     }
 
     @Override
-    public Place findById(Long id) {
+    public Place findById(Long id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException("Id is null.");
+        }
         return em.find(Place.class, id);
     }
 
     @Override
-    public Place findByName(String name) {
+    public Place findByName(String name) throws IllegalArgumentException {
+        if (name == null) {
+            throw new IllegalArgumentException("Name is null.");
+        }
+        
         try {
             return em.createQuery("select p from Place p where p.name = :name", Place.class)
                     .setParameter("name", name)
