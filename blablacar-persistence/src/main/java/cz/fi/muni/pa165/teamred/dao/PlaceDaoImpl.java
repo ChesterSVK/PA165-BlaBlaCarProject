@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Erik Horváth
@@ -18,6 +19,7 @@ public class PlaceDaoImpl implements PlaceDao {
     private EntityManager em;
 
     @Override
+    @Transactional
     public void create(Place place) throws IllegalArgumentException {
         if (place == null) {
             throw new IllegalArgumentException("Place is null.");
