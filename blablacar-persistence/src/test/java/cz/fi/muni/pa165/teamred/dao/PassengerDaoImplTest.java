@@ -36,7 +36,7 @@ public class PassengerDaoImplTest extends AbstractTestNGSpringContextTests {
     private RideDao rideDao;
 
     @Test
-    public void findAllRides(){
+    public void findAllPassengers(){
         Passenger psg = new Passenger();
 
         Ride r1 = new Ride();
@@ -53,7 +53,7 @@ public class PassengerDaoImplTest extends AbstractTestNGSpringContextTests {
 
         userDao.create(psg);
 
-        List<Ride> psgRides  = passengerDao.findAllRides();
+        List<Ride> psgRides  = passengerDao.findAllPassengers();
 
         Assert.assertEquals(psgRides.size(), 2);
 

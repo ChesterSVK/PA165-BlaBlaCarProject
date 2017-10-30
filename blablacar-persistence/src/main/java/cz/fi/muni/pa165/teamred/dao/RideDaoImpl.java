@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.teamred.dao;
 
 import cz.fi.muni.pa165.teamred.entity.Ride;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +11,8 @@ import java.util.List;
 /**
  * Created by Šimon on 26.10.2017.
  */
+@Repository
+@Transactional
 public class RideDaoImpl implements RideDao {
 
     @PersistenceContext
