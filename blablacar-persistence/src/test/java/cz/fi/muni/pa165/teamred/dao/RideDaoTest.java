@@ -2,19 +2,16 @@ package cz.fi.muni.pa165.teamred.dao;
 
 import cz.fi.muni.pa165.teamred.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.teamred.entity.Driver;
-import cz.fi.muni.pa165.teamred.entity.Passenger;
 import cz.fi.muni.pa165.teamred.entity.Place;
 import cz.fi.muni.pa165.teamred.entity.Ride;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Calendar;
 import java.util.Date;
-
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.AfterClass;
@@ -24,7 +21,6 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.in;
 
 /**
  * Created by Jozef Cibík on 29.10.2017.
