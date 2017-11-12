@@ -48,7 +48,7 @@ public interface PlaceFacade {
      * @param placeName of place which will be retrieved
      * @return found place or null if none found
      */
-    PlaceDTO getPlaceWithName(Long placeName);
+    PlaceDTO getPlaceWithName(String placeName);
 
     /**
      * Retrieves all rides originating in place

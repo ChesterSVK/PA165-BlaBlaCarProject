@@ -2,9 +2,11 @@ package cz.fi.muni.pa165.teamred.service;
 
 import cz.fi.muni.pa165.teamred.dao.PlaceDao;
 import cz.fi.muni.pa165.teamred.entity.Place;
+import cz.fi.muni.pa165.teamred.entity.Ride;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @Service
 public class PlaceServiceImpl implements PlaceService {
+
     @Inject
     private PlaceDao placeDao;
 
@@ -59,5 +62,21 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<Place> findAll() {
         return placeDao.findAll();
+    }
+
+    @Override
+    public List<Ride> findRidesWithOriginatingAndDestinationPlace(Long originatingPlaceId, Long destinationPlaceId) throws IllegalArgumentException {
+
+        Place placeOriginating = placeDao.findById(originatingPlaceId);
+        Place placeDestination = placeDao.findById(destinationPlaceId);
+
+        if(placeOriginating == null || placeDestination == null) {
+            return null;
+        }
+
+        List<Ride> resultRideList = new ArrayList<>(placeOriginating.getOriginatingRides());
+        resultRideList.retainAll(placeDestination.getDestinationRides());
+
+        return resultRideList.isEmpty() ? null : resultRideList;
     }
 }

@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.teamred.service;
 
 import cz.fi.muni.pa165.teamred.entity.Place;
+import cz.fi.muni.pa165.teamred.entity.Ride;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,4 +63,18 @@ public interface PlaceService {
      * @return all {@link cz.fi.muni.pa165.teamred.entity.Place} objects stored
      */
     List<Place> findAll();
+
+    /**
+     * Retrieves all {@link cz.fi.muni.pa165.teamred.entity.Ride} originating in one place and having destination in
+     * another place
+     *
+     * @param originatingPlaceId of place for which originating {@link cz.fi.muni.pa165.teamred.entity.Ride}
+     *                           will be considered
+     * @param destinationPlaceId of place for which destination {@link cz.fi.muni.pa165.teamred.entity.Ride}
+     *                           will be considered
+     * @return found rides with originating place and destination place specified or null if none found
+     * @throws IllegalArgumentException
+     */
+    List<Ride> findRidesWithOriginatingAndDestinationPlace(Long originatingPlaceId, Long destinationPlaceId)
+            throws IllegalArgumentException;
 }
