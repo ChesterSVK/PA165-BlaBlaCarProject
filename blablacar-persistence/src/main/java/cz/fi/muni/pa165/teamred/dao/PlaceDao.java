@@ -53,5 +53,4 @@ public interface PlaceDao {
      * @exception IllegalArgumentException if name is null
      */
     Place findByName(String name) throws IllegalArgumentException;
-
 }

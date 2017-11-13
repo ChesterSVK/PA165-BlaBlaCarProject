@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service class operating over {@link cz.fi.muni.pa165.teamred.entity.Place} entity.
+ * Service class providing operations related to {@link cz.fi.muni.pa165.teamred.entity.Place} entity.
  *
  * @author miroslav.laco@gmail.com
  */

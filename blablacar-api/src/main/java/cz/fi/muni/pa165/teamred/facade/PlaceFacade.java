@@ -7,6 +7,8 @@ import cz.fi.muni.pa165.teamred.dto.RideDTO;
 import java.util.List;
 
 /**
+ * Facade interface for operations over Places
+ *
  * @author miroslav.laco@gmail.com
  */
 // todo: exception handling
