@@ -26,9 +26,7 @@
     <jsp:attribute name="body">
         <%--<fmt:message key="page.welcome.hello-world"/>--%>
 
-        <h1>WELCOME</h1>
-
-        <div id="sign-in-out-button" class="g-signin2" data-onsuccess="onSignIn"></div>
+        <h1>HOMEPAGE</h1>
 
         <c:if test="${userSession.userIsLoggedIn}">
             <div>
@@ -112,5 +110,6 @@
     </jsp:attribute>
     <jsp:attribute name="foot">
         <!--Load only necessary files-->
+
     </jsp:attribute>
 </blablacar-tags:page-template>

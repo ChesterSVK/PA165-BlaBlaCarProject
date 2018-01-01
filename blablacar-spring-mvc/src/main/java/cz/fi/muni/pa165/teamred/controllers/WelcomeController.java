@@ -14,6 +14,7 @@ import cz.fi.muni.pa165.teamred.facade.UserFacade;
 import cz.fi.muni.pa165.teamred.models.PlaceForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -54,6 +55,10 @@ public class WelcomeController {
     //matches all url "/*"
     @RequestMapping
     public String doWelcome(Model model){
+
+        if(session.isUserIsLoggedIn()) {
+            return "homepage";
+        }
         //Return to view
         return "welcome";
     }
@@ -138,7 +143,7 @@ public class WelcomeController {
         String givenName = (String) payload.get("given_name");
         redirectAttributes.addFlashAttribute("alert_success", "Hello " + givenName + "! You have been successfully logged in");
 
-        return "welcome";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/tokensignout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -210,7 +215,7 @@ public class WelcomeController {
 
         }
 
-        return "redirect:" + uriBuilder.path("/user").buildAndExpand().encode().toUriString();
+        return "redirect:/";
     }
 
     @ModelAttribute(name = "placeForm")
