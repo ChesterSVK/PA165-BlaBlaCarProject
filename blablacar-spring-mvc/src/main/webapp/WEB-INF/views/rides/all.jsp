@@ -74,7 +74,7 @@
                             <c:if test = "${(not fn:contains(ride.passengers, userSession.user))}">
                                 <c:if test = "${( ride.driver.id eq userSession.userId)}">
                                     <form:form action="${pageContext.request.contextPath}/ride/list-driver" id="join-ride" method="get">
-                                        <button type="submit" class="btn btn-warning" name="rideId" value="${ride.id}">Manage rides</button>
+                                        <button type="submit" class="btn btn-warning" name="rideId" value="${ride.id}">Manage ride</button>
                                     </form:form>
                                 </c:if>
                                 <c:if test = "${not ( ride.driver.id eq userSession.userId) && (ride.availableSeats gt 0)}">
@@ -90,7 +90,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/showRide/${ride.id}">Join Disscusion</a>
+                            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/showRide/${ride.id}">View Ride</a>
                         </td>
                     </tr>
             </c:forEach>

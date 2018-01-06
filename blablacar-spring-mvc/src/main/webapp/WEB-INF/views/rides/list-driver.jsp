@@ -24,8 +24,8 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">
-                            All rides
+                        <a class="btn btn-default" href="${pageContext.request.contextPath}">
+                            Search ride
                         </a>
                     </li>
                     <li>
@@ -70,6 +70,13 @@
                             </td>
                             <td>
                                 <c:out value="${ride.seatPrice}"></c:out>
+                            </td>
+                            <td>
+                                <c:if test = "${( ride.driver.id eq userSession.userId)}">
+                                    <form:form action="${pageContext.request.contextPath}/ride/list-driver" id="join-ride" method="get">
+                                        <button type="submit" class="btn btn-warning" name="rideId" value="${ride.id}">Manage ride</button>
+                                    </form:form>
+                                </c:if>
                             </td>
                             <td>
                                 <c:if test="${ride.driver.id eq userSession.userId}">

@@ -24,8 +24,8 @@
             <div class="container-fluid">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">
-                            All rides
+                        <a class="btn btn-default" href="${pageContext.request.contextPath}">
+                            Search ride
                         </a>
                     </li>
                 </ul>

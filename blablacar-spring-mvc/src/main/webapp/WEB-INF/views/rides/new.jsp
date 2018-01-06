@@ -19,6 +19,11 @@
     </jsp:attribute>
     <jsp:attribute name="body">
 
+        <%--TODO: Restrict same FROM/TO place--%>
+        <%--TODO: Add time--%>
+        <%--TODO: Show error message on unsuccessful ride creation; remember values in fields after unsuccessful ride creation;--%>
+        <%--TODO: Form validation (cannot be empty etc..)--%>
+
         <form:form action="${pageContext.request.contextPath}/ride/create" id="ride-create-form" method="post" modelAttribute="rideCreateDTO" class="form-group">
             <form:input path="driverId" type="text" value="${rideCreateDTO.driverId}" cssClass="hidden" />
             <label for="select-from">From</label>
