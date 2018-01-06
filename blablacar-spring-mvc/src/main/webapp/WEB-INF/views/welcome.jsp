@@ -111,7 +111,5 @@
     </jsp:attribute>
     <jsp:attribute name="foot">
         <!--Load only necessary files-->
-        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
-        <script src='<c:url value="/resources/javascript/GoogleOAuth.js"/>'></script>
     </jsp:attribute>
 </blablacar-tags:page-template>

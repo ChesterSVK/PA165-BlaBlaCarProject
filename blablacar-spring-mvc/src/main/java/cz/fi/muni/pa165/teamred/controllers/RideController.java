@@ -57,6 +57,7 @@ public class RideController {
         if (!isValidBinding(result, model)) {
             model.addAttribute("rideCreateDTO", ride);
             String referer = request.getHeader("Referer");
+            redirectAttributes.addFlashAttribute("alert_error", "Error");
             return "redirect:" + referer;
         }
 
