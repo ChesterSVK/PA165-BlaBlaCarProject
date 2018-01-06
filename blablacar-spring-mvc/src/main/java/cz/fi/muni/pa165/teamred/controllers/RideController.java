@@ -129,7 +129,7 @@ public class RideController {
 
         redirectAttributes.addFlashAttribute("alert_success", "Ride " + userSession.getUserId() + " was udated");
 
-        return "redirect:ride/showRide/" + ride.getId();
+        return "redirect:/ride/showRide/" + ride.getId();
     }
 
     @RequestMapping(value = "/addPassenger")
@@ -199,6 +199,16 @@ public class RideController {
         return "rides/all";
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String listSearchResult(@RequestParam(required=true) Long placeFrom,
+                                   @RequestParam(required=true) Long placeTo,
+                                   Model model) {
+
+        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlace(placeFrom,placeTo));
+        model.addAttribute("places", placeFacade.getAllPlaces()); //TODO: PASS MODEL TO REDIRECTED PAGE
+        return "rides/all"; //create new view with search on top
+    }
+
     @RequestMapping("")
     public String redirectTo404Page(Model model, HttpServletRequest request, HttpServletResponse response) {
         return "error404";
@@ -207,16 +217,14 @@ public class RideController {
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
                                    BindingResult result,
-                                   Model model,
-                                   RedirectAttributes redirectAttributes,
-                                   HttpServletResponse response,
-                                   HttpServletRequest request) {
-        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlace(placeForm.getFromId(),placeForm.getToId()));
-        model.addAttribute("places", placeFacade.getAllPlaces());
-        return "welcome";
+                                   RedirectAttributes redirectAttributest) {
+        //redirectAttributes.addFlashAttribute("rideFrom", placeForm.getFromId());
+        //redirectAttributes.addFlashAttribute("rideFrom", placeForm.getToId());
+
+        return "redirect:/ride/search?placeFrom=" + placeForm.getFromId() + "&placeTo=" + placeForm.getToId();
     }
 
-
+//"rides",placeFacade.getRidesWithOriginatingAndDestinationPlace(placeForm.getFromId(),placeForm.getToId())
 
     @ModelAttribute(name = "userSession")
     public UserSession addUserSession(){
