@@ -1,9 +1,13 @@
 package cz.fi.muni.pa165.teamred.controllers;
 
 import cz.fi.muni.pa165.teamred.config.UserSession;
+import cz.fi.muni.pa165.teamred.dto.CommentAuthorDTO;
 import cz.fi.muni.pa165.teamred.dto.CommentCreateDTO;
 import cz.fi.muni.pa165.teamred.dto.CommentDTO;
+import cz.fi.muni.pa165.teamred.dto.RideDTO;
 import cz.fi.muni.pa165.teamred.facade.CommentFacade;
+import cz.fi.muni.pa165.teamred.facade.RideFacade;
+import cz.fi.muni.pa165.teamred.facade.UserFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +42,12 @@ public class CommentController {
 
     @Autowired
     private CommentFacade commentFacade;
+
+    @Autowired
+    private UserFacade userFacade;
+
+    @Autowired
+    private RideFacade rideFacade;
 
     //only for post method allowed creating a new comment
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -95,12 +105,21 @@ public class CommentController {
     }
 
     //Only for a get method allowed to list all comments
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody List<CommentDTO> listAllUserComments(Model model, HttpServletRequest request, HttpServletResponse response){
-        //TODO
-        //list all comments from user with id retrieved from user session bean
-        //return the list
-        return new ArrayList<>();
+    @RequestMapping(value = "/manage", method = RequestMethod.GET)
+    public String listComments(Model model){
+        List<CommentDTO> comments = commentFacade.getAllComments();
+
+        ArrayList<CommentAuthorDTO> displayComments = new ArrayList<>();
+        for (CommentDTO comment:comments) {
+
+            CommentAuthorDTO newComment = new CommentAuthorDTO(comment);
+            newComment.setAuthor(userFacade.findUserById(comment.getId()));
+
+            displayComments.add(newComment);
+        }
+
+        model.addAttribute("comments", displayComments);
+        return "comments/all-manage";
     }
 
     @RequestMapping("")
