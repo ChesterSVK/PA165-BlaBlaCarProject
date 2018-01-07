@@ -55,7 +55,7 @@ function signOut() {
             beforeSend: function(request) {
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             },
-            url: "/pa165/tokensignout",
+            url: "/pa165/tokensignoutsecure",
             data: 'idtoken=' + id_token,
             processData: false,
             success: function(msg) {

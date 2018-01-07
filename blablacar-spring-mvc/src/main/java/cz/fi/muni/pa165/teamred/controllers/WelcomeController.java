@@ -142,15 +142,27 @@ public class WelcomeController {
     @RequestMapping(value = "/tokensignout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String doTokenSignOut(@RequestParam Map<String,String> paramMap,
                                  ModelMap modelMap,
+                                 RedirectAttributes redirectAttributes) {
+
+        userSession.setUserIsLoggedIn(false);
+        userSession.setAdmin(false);
+        userSession.setUser(null);
+        userSession.setUserId(null);
+
+        redirectAttributes.addFlashAttribute("alert_success", "You have been successfully signed out!");
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/tokensignoutsecure", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String doTokenSignOutVerified(@RequestParam Map<String,String> paramMap,
+                                 ModelMap modelMap,
                                  RedirectAttributes redirectAttributes,
                                  UriComponentsBuilder uriBuilder,
                                  HttpServletRequest request) {
 
         if(paramMap == null && paramMap.get("idtoken") == null) {
-            //Allow to sign out without token - token verification is not possible
-            userSession = new UserSession();
-
-            redirectAttributes.addFlashAttribute("alert_success", "You have been successfully signed out!");
+            redirectAttributes.addFlashAttribute("alert_danger", "No token submitted for secure sign out! " +
+                    "Token required for identity verification...");
             return "redirect:" + request.getRequestURI();
         }
 
@@ -186,9 +198,12 @@ public class WelcomeController {
 
         if(Objects.equals(userSession.getUserId(),foundUser.getId())) {
             //Token verification successful
-            userSession = new UserSession();
-            redirectAttributes.addFlashAttribute("alert_success", "You have been successfully signed out!");
+            userSession.setUserIsLoggedIn(false);
+            userSession.setAdmin(false);
+            userSession.setUser(null);
+            userSession.setUserId(null);
 
+            redirectAttributes.addFlashAttribute("alert_success", "You have been successfully signed out!");
             return "redirect:/";
 
         }
@@ -210,4 +225,5 @@ public class WelcomeController {
     public UserSession addUserSession(){
         return userSession;
     }
+
 }
