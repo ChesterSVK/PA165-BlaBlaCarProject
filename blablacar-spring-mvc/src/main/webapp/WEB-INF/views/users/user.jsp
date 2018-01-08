@@ -10,10 +10,12 @@
 <%--<fmt:message key = "page.user.title" var = "title"/>--%>
 
 
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Let's start">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/user.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+              crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
 

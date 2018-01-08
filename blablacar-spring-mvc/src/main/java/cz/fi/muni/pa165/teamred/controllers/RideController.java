@@ -54,7 +54,6 @@ public class RideController {
         log.debug("create(ride={})", ride);
 
         if (!isValidBinding(result, model)) {
-            log.debug("NOT VALID @@@@@@@@@@@@@@@@@@@@@@@2");
             return "rides/new";
         }
 
@@ -221,13 +220,9 @@ public class RideController {
     public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
                                    BindingResult result,
                                    RedirectAttributes redirectAttributest) {
-        //redirectAttributes.addFlashAttribute("rideFrom", placeForm.getFromId());
-        //redirectAttributes.addFlashAttribute("rideFrom", placeForm.getToId());
 
         return "redirect:/ride/search?placeFrom=" + placeForm.getFromId() + "&placeTo=" + placeForm.getToId();
     }
-
-//"rides",placeFacade.getRidesWithOriginatingAndDestinationPlace(placeForm.getFromId(),placeForm.getToId())
 
     @ModelAttribute(name = "userSession")
     public UserSession addUserSession(){

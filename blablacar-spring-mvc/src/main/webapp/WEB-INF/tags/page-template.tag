@@ -65,7 +65,7 @@
                 </li>
                 <c:if test="${not empty userSession.userId}">
                     <li>
-                        <blablacar-tags:a href="/user">Start</blablacar-tags:a>
+                        <blablacar-tags:a href="/user">User</blablacar-tags:a>
                     </li>
                     <li>
                         <blablacar-tags:a href="/user/user-details">Logged in as: ${userSession.user.nickname}</blablacar-tags:a>

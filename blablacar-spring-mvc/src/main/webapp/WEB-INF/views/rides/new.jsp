@@ -16,6 +16,8 @@
         <!--Load only necessary files-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/ride.css"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+              crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
 

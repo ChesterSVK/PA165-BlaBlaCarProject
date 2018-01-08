@@ -11,17 +11,17 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="User details">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <meta name="google-signin-client_id"
               content="332736943859-mrr2173fc1kseq1l2i4h0na68mnpmbp3.apps.googleusercontent.com">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/welcome.css"
               crossorigin="anonymous">
+                <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+                      crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
-        <%--<fmt:message key="page.welcome.hello-world"/>--%>
-        <h1>User Details</h1>
         <div class="jumbotron">
             <div class="row">
 

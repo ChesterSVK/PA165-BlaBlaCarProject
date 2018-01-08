@@ -12,29 +12,22 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
-<fmt:message key="page.welcome.title" var="title"/>
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Driver rides">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/ride.css"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+              crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">
-                            All rides
-                        </a>
-                    </li>
-                    <li>
-                        <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/new">
-                            New Ride
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <nav>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">
+                All rides
+            </a>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/new">
+                New Ride
+            </a>
         </nav>
         <c:if test="${fn:length(rides) eq 0}">
                         <p>No rides</p>
@@ -73,8 +66,10 @@
                             </td>
                             <td>
                                 <c:if test="${ride.driver.id eq userSession.userId}">
-                                    <form:form action="${pageContext.request.contextPath}/ride/delete" id="join-ride" method="get">
-                                        <button type="submit" class="btn btn-primary" name="rideId" value="${ride.id}">Remove ride
+                                    <form:form action="${pageContext.request.contextPath}/ride/delete" id="join-ride"
+                                               method="get">
+                                        <button type="submit" class="btn btn-primary" name="rideId" value="${ride.id}">
+                                            Remove ride
                                         </button>
                                     </form:form>
                                 </c:if>

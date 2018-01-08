@@ -14,7 +14,7 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Homepage">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <meta name="google-signin-client_id"
@@ -29,107 +29,24 @@
 
         <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-        <h1>HOMEPAGE</h1>
 
         <c:if test="${userSession.userIsLoggedIn}">
 
             <div class="row">
 
                 <div class="welcome-holder text-center jumbotron col-xs-12">
-                    <a class="top-button col-xs-6" href="${contextPath}/ride/new" role="button">
+                    <a class="btn btn-default col-xs-6" href="${contextPath}/ride/new" role="button">
                         <h2>
                             Create Ride
                         </h2>
                     </a>
-                    <a class="bottom-button col-xs-6" href="${contextPath}/ride/list-driver" role="button">
+                    <a class="btn btn-default col-xs-6" href="${contextPath}/ride/list" role="button">
                         <h2>
                             Search Rides
                         </h2>
                     </a>
                 </div>
             </div>
-
-            <div>
-                <h2>Search</h2>
-                <div class="jumbotron">
-                    <form:form method="post" action="${pageContext.request.contextPath}/ride/find" id="search-form"
-                               modelAttribute="placeForm">
-                        <h3>From</h3>
-                        <form:select path="fromId" type="text" form="search-form">
-                            <c:forEach items="${places}" var="placeF">
-                               <form:option value="${placeF.id}">
-                                       ${placeF.name}
-                               </form:option>
-                            </c:forEach>
-                        </form:select>
-                        <h3>To:</h3>
-                        <form:select path="toId" type="text" form="search-form">
-                            <c:forEach items="${places}" var="placeF">
-                               <form:option value="${placeF.id}">
-                                       ${placeF.name}
-                               </form:option>
-                            </c:forEach>
-                        </form:select>
-                        <button type="submit">Find</button>
-                    </form:form>
-                </div>
-            </div>
-
-            <c:if test="${not (fn:length(rides) eq 0)}">
-                <table class="table rides-list table-hover">
-                    <thead>
-                    <tr>
-                        <td>DRIVER</td>
-                        <td>DATE</td>
-                        <td>FROM</td>
-                        <td>TO</td>
-                        <td>SEATS</td>
-                        <td>PRIZE</td>
-                    </tr>
-                    </thead>
-                    <c:forEach var="ride" items="${rides}">
-                            <tr class="ride-item">
-                                <td>
-                                    <c:out value="${ride.driver.name}"></c:out>
-                                </td>
-                                <td>
-                                    <c:out value="${ride.departure}"></c:out>
-                                </td>
-                                <td>
-                                    <c:out value="${ride.sourcePlace.name}"></c:out>
-                                </td>
-                                <td>
-                                    <c:out value="${ride.destinationPlace.name}"></c:out>
-                                </td>
-                                <td>
-                                    <c:out value="${ride.availableSeats}"></c:out>
-                                </td>
-                                <td>
-                                    <c:out value="${ride.seatPrice}"></c:out>
-                                </td>
-                                <td>
-                                    <c:if test="${(not fn:contains(ride.passengers, userSession.user)) && (not (ride.driver.id eq userSession.userId)) && (ride.availableSeats gt 0) }">
-                                        <form:form action="${pageContext.request.contextPath}/ride/addPassenger"
-                                                   id="join-ride" method="get">
-                                            <button type="submit" class="btn btn-primary" name="rideId"
-                                                    value="${ride.id}">Join ride
-                                            </button>
-                                        </form:form>
-                                    </c:if>
-                                    <c:if test="${fn:contains(ride.passengers, userSession.user)}">
-                                        <form:form action="${pageContext.request.contextPath}/ride/removePassenger"
-                                                   id="join-ride" method="get">
-                                            <button type="submit" class="btn btn-primary" name="rideId"
-                                                    value="${ride.id}">Leave ride
-                                            </button>
-                                        </form:form>
-                                    </c:if>
-                                </td>
-                            </tr>
-
-                    </c:forEach>
-                </table>
-            </c:if>
         </c:if>
 
         <script>
