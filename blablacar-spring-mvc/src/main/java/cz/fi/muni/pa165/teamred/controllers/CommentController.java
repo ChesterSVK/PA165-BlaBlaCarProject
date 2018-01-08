@@ -91,13 +91,13 @@ public class CommentController {
         return "comments/new";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String deleteComment(@RequestParam(value = "id", required = true) Long id, Model model, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/delete")
+    public String deleteComment(@RequestParam(name = "commentId") Long commentId,
+                                Model model,
+                                HttpServletRequest request,
+                                HttpServletResponse response){
 
-        //TODO
-        //Delete comment with received id
-        //check it first
-
+        commentFacade.deleteComment(commentId);
 
         // redirect to caller page
         String referer = request.getHeader("Referer");

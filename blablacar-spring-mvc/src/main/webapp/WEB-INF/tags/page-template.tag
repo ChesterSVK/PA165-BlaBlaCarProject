@@ -46,10 +46,19 @@
                     <li>
                         <blablacar-tags:a href="/user"><f:message key="navigation-menu.starting"/></blablacar-tags:a>
                     </li>
+                    <c:if test="${userSession.isAdmin}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation-menu.admin"/><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><blablacar-tags:a href="/comment/manage"><f:message key="navigation-menu.admin.comments"/></blablacar-tags:a></li>
+                        </ul>
+                    </li>
+                    </c:if>
                     <li>
                         <blablacar-tags:a href="/user/user-details">Logged in as: ${userSession.user.name}</blablacar-tags:a>
                     </li>
                 </c:if>
+
                 <c:if test="${userSession.userIsLoggedIn}">
                     <li>
                         <div class="btn btn-default" id="sign-out-btn" >Sign out</div>

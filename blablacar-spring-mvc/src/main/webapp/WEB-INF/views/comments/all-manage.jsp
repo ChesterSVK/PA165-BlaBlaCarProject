@@ -34,7 +34,7 @@
                 </tr>
                 </thead>
                 <c:forEach var="comment" items="${comments}">
-                    <tr class="ride-item">
+                    <tr class="comment-item">
                         <td>
                             <c:out value="${comment.rideId}"></c:out>
                         </td>

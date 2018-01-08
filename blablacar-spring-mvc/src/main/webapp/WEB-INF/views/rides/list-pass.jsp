@@ -67,6 +67,9 @@
                                 <c:out value="${ride.seatPrice}"></c:out>
                             </td>
                             <td>
+                                <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/showRide/${ride.id}">View Ride</a>
+                            </td>
+                            <td>
                                 <c:if test = "${(not fn:contains(ride.passengers, userSession.user)) && (not (ride.driver.id eq userSession.userId)) && (ride.availableSeats gt 0) }">
                                     <form:form action="${pageContext.request.contextPath}/ride/addPassenger" id="join-ride" method="get">
                                         <button type="submit" class="btn btn-primary" name="rideId" value="${ride.id}">Join ride</button>

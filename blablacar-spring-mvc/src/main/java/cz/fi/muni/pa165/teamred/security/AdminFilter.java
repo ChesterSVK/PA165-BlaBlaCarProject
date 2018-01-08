@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //TODO: LIST URL WITH ONLY ADMIN ACCESS
-@WebFilter(urlPatterns = {"/comment/manage"})
+@WebFilter(urlPatterns = {"/comment/manage","/comment/delete"})
 public class AdminFilter implements Filter {
 
     @Autowired
@@ -30,7 +30,7 @@ public class AdminFilter implements Filter {
 
         userSession = appContext.getBean(UserSession.class);
 
-        if (userSession.getUserId() == null || !userSession.isAdmin()) {
+        if (userSession.getUserId() == null || !userSession.getIsAdmin()) {
             response401((HttpServletResponse) servletResponse);
             return;
         }

@@ -71,6 +71,9 @@
                             <c:out value="${ride.seatPrice}"></c:out>
                         </td>
                         <td>
+                            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/showRide/${ride.id}">View Ride</a>
+                        </td>
+                        <td>
                             <c:if test = "${(not fn:contains(ride.passengers, userSession.user))}">
                                 <c:if test = "${( ride.driver.id eq userSession.userId)}">
                                     <form:form action="${pageContext.request.contextPath}/ride/list-driver" id="join-ride" method="get">
@@ -88,9 +91,6 @@
                                     <button type="submit" class="btn btn-danger" name="rideId" value="${ride.id}">Leave ride</button>
                                 </form:form>
                             </c:if>
-                        </td>
-                        <td>
-                            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/showRide/${ride.id}">View Ride</a>
                         </td>
                     </tr>
             </c:forEach>
