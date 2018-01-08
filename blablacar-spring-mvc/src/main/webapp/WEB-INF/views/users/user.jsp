@@ -10,10 +10,12 @@
 <%--<fmt:message key = "page.user.title" var = "title"/>--%>
 
 
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Let's start">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/user.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+              crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
 
@@ -46,10 +48,10 @@
                     <div class="passenger-holder background-holder jumbotron no-padding">
                         <div class="green-shader">
                             <h2>Passenger</h2>
-                            <a class="top-button" href="${contextPath}/ride/list" role="button">
+                            <a class="top-button" href="${contextPath}/ride/search" role="button">
                                 <div class="">
                                     <p>
-                                        Join Ride
+                                        Search Ride
                                     </p>
                                 </div>
                             </a>

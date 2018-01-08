@@ -40,7 +40,6 @@ public class RideController {
     private PlaceFacade placeFacade;
     @Autowired
     private UserFacade userFacade;
-
     @Autowired
     private UserSession userSession;
 
@@ -54,10 +53,12 @@ public class RideController {
 
         log.debug("create(ride={})", ride);
 
+        if (ride.getDestinationPlaceId().equals(ride.getSourcePlaceId())){
+            model.addAttribute("alert_danger", "Destination place and source place are the same.");
+            return "rides/new";
+        }
         if (!isValidBinding(result, model)) {
-            model.addAttribute("rideCreateDTO", ride);
-            String referer = request.getHeader("Referer");
-            return "redirect:" + referer;
+            return "rides/new";
         }
 
         //create
@@ -83,14 +84,19 @@ public class RideController {
     }
 
 
+
     @RequestMapping(value = "/new", method = RequestMethod.GET)
-    public String addRideForm(ModelMap model) {
+    public String createNewRide(){
+        return "rides/new";
+    }
+
+    @ModelAttribute
+    public void addRideForm(ModelMap model) {
         RideCreateDTO newRide = new RideCreateDTO();
         List<PlaceDTO> places = new ArrayList<>(placeFacade.getAllPlaces());
         newRide.setDriverId(userSession.getUserId());
         model.addAttribute("rideCreateDTO", newRide);
         model.addAttribute("places" , places);
-        return "rides/new";
     }
 
     @RequestMapping(value = "/showRide/{rideId}", method = RequestMethod.GET)
@@ -200,12 +206,10 @@ public class RideController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String listSearchResult(@RequestParam(required=true) String placeFrom,
-                                   @RequestParam(required=true) String placeTo,
-                                   Model model) {
-
-        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlaceByName(placeFrom,placeTo));
-        return "rides/all"; //create new view with search on top
+    public String listSearchResult(Model model, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("placeForm", new PlaceForm());
+        model.addAttribute("places", placeFacade.getAllPlaces());
+        return "rides/search"; //create new view with search on top
     }
 
     @RequestMapping("")
@@ -215,11 +219,28 @@ public class RideController {
 
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
+                                   Model model,
                                    BindingResult result,
                                    RedirectAttributes redirectAttributest) {
-
-        return "redirect:/ride/search?placeFrom=" + placeForm.getFrom() + "&placeTo=" + placeForm.getTo();
+        model.addAttribute("rides", placeFacade.getRidesWithOriginatingAndDestinationPlace(Long.valueOf(placeForm.getFrom()),Long.valueOf(placeForm.getTo())));
+        return "rides/search";
     }
+//    @RequestMapping(value = "/search", method = RequestMethod.GET)
+//    public String listSearchResult(@RequestParam(required=true) String placeFrom,
+//                                   @RequestParam(required=true) String placeTo,
+//                                   Model model) {
+//
+//        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlaceByName(placeFrom,placeTo));
+//        return "rides/all"; //create new view with search on top
+//    }
+//
+//    @RequestMapping(value = "/find", method = RequestMethod.POST)
+//    public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
+//                            BindingResult result,
+//                            RedirectAttributes redirectAttributest) {
+//
+//        return "redirect:/ride/search?placeFrom=" + placeForm.getFrom() + "&placeTo=" + placeForm.getTo();
+//    }
 
     @ModelAttribute(name = "userSession")
     public UserSession addUserSession(){
