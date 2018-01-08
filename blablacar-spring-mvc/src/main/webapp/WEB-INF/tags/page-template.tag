@@ -37,13 +37,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation-menu.project-name"/></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">PA165 BlaBlaCar</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><blablacar-tags:a href="/"><f:message key="navigation-menu.blablacar"/></blablacar-tags:a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation-menu.docs"/><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Javadocs</li>
                         <li><a href="http://docs.oracle.com/javase/8/docs/api/">JDK 8 API</a></li>
@@ -56,7 +55,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation-menu.about"/><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="https://is.muni.cz/predmet/fi/podzim2015/PA165">PA165</a></li>
                         <li><a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">SpringMVC</a></li>
@@ -66,7 +65,7 @@
                 </li>
                 <c:if test="${not empty userSession.userId}">
                     <li>
-                        <blablacar-tags:a href="/user"><f:message key="navigation-menu.starting"/></blablacar-tags:a>
+                        <blablacar-tags:a href="/user">Start</blablacar-tags:a>
                     </li>
                     <li>
                         <blablacar-tags:a href="/user/user-details">Logged in as: ${userSession.user.nickname}</blablacar-tags:a>
@@ -74,7 +73,7 @@
                 </c:if>
                 <c:if test="${userSession.userIsLoggedIn}">
                     <li>
-                        <div class="btn btn-default" id="sign-out-btn" >Sign out</div>
+                        <a  href="#" id="sign-out-btn" >Sign out</a>
                     </li>
                 </c:if>
             </ul>
@@ -83,6 +82,7 @@
 </nav>
 
 <div class="container">
+
 
     <!-- page title -->
     <c:if test="${not empty title}">
@@ -136,8 +136,6 @@
 <script src='<c:url value="/resources/javascript/application.js" />'></script>
 <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 <script src='<c:url value="/resources/javascript/GoogleOAuth.js"/>'></script>
-
-
 
 <jsp:invoke fragment="foot"/>
 </body>

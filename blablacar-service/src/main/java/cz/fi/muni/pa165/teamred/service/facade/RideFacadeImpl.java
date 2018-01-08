@@ -48,8 +48,6 @@ public class RideFacadeImpl implements RideFacade {
     public Long createRide(RideCreateDTO rideCreateDTO) {
         Ride mappedRide = beanMappingService.mapTo(rideCreateDTO, Ride.class);
 
-//        User mappedUser = beanMappingService.mapTo(userDTO, User.class);
-
         User user = userService.findUserById(rideCreateDTO.getDriverId());
         mappedRide.setDriver(user);
         user.addRideAsDriver(mappedRide);
