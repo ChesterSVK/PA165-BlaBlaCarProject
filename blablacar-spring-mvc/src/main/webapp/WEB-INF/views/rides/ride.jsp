@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: jcibik
@@ -39,18 +41,26 @@
         <form:form action="${pageContext.request.contextPath}/comment/new" id="join-ride" method="get">
             <button type="submit" class="btn btn-default" name="rideId" value="${rideDTO.id}">Add comment</button>
         </form:form>
-        <ul class="list-group">
-            <c:forEach items="${rideDTO.comments}" var="comment">
-                <li class="list-group-item">
-                    <div class="comment-holder">
-                        <h3 class="badge"><fmt:formatDate value="${comment.created}" pattern="dd.MM.yyyy"/></h3>
-                        <pre>
-                            <c:out value="${comment.text}"/>
-                        </pre>
-                    </div>
-                </li>
-            </c:forEach>
-        </ul>
+        <div class="jumbotron">
+            <c:if test="${fn:length(rideDTO.comments) eq 0}">
+                <p>No comments</p>
+            </c:if>
+            <ul class="list-group">
+                <h3>Last comments on this ride</h3>
+                <c:forEach items="${rideDTO.comments}" var="comment">
+                    <li class="list-group-item">
+                        <div class="comment-holder row">
+                            <div class="col-xs-10">
+                                <c:out value="${comment.text}"/>
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="badge float-right"><fmt:formatDate value="${comment.created}" pattern="dd.MM.yyyy"/></span>
+                            </div>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
     </jsp:attribute>
 
 

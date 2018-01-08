@@ -79,7 +79,7 @@ public class RideFacadeImpl implements RideFacade {
     public RideDTO getRideWithId(Long rideId) {
         Ride ride = rideService.findById(rideId);
         log.debug("Found Ride in " + RideFacadeImpl.class + "with paramenters" + ride.toString());
-        return (ride == null) ? null : beanMappingService.mapTo(ride, RideDTO.class);
+        return beanMappingService.mapTo(ride, RideDTO.class);
     }
 
     @Override

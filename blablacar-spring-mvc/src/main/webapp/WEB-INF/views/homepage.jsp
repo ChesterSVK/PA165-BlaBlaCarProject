@@ -40,7 +40,7 @@
                             Create Ride
                         </h2>
                     </a>
-                    <a class="btn btn-default col-xs-6" href="${contextPath}/ride/list" role="button">
+                    <a class="btn btn-default col-xs-6" href="${contextPath}/ride/search" role="button">
                         <h2>
                             Search Rides
                         </h2>

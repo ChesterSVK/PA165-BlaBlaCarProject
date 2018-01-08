@@ -53,6 +53,10 @@ public class RideController {
 
         log.debug("create(ride={})", ride);
 
+        if (ride.getDestinationPlaceId().equals(ride.getSourcePlaceId())){
+            model.addAttribute("alert_danger", "Destination place and source place are the same.");
+            return "rides/new";
+        }
         if (!isValidBinding(result, model)) {
             return "rides/new";
         }
@@ -202,13 +206,10 @@ public class RideController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String listSearchResult(@RequestParam(required=true) Long placeFrom,
-                                   @RequestParam(required=true) Long placeTo,
-                                   Model model) {
-
-        model.addAttribute("rides",placeFacade.getRidesWithOriginatingAndDestinationPlace(placeFrom,placeTo));
-        model.addAttribute("places", placeFacade.getAllPlaces()); //TODO: PASS MODEL TO REDIRECTED PAGE
-        return "rides/all"; //create new view with search on top
+    public String listSearchResult(Model model, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("placeForm", new PlaceForm());
+        model.addAttribute("places", placeFacade.getAllPlaces());
+        return "rides/search"; //create new view with search on top
     }
 
     @RequestMapping("")
@@ -218,10 +219,11 @@ public class RideController {
 
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     public String findRides(@Valid @ModelAttribute("placeForm") PlaceForm placeForm,
+                                   Model model,
                                    BindingResult result,
                                    RedirectAttributes redirectAttributest) {
-
-        return "redirect:/ride/search?placeFrom=" + placeForm.getFromId() + "&placeTo=" + placeForm.getToId();
+        model.addAttribute("rides", placeFacade.getRidesWithOriginatingAndDestinationPlace(placeForm.getFromId(),placeForm.getToId()));
+        return "rides/search";
     }
 
     @ModelAttribute(name = "userSession")
