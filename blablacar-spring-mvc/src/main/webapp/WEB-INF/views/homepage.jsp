@@ -22,6 +22,8 @@
               content="332736943859-mrr2173fc1kseq1l2i4h0na68mnpmbp3.apps.googleusercontent.com">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/welcome.css"
               crossorigin="anonymous">
+         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/easy-autocomplete.css"
+               crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
         <%--<fmt:message key="page.welcome.hello-world"/>--%>
@@ -32,23 +34,15 @@
             <div>
                 <h2>Search</h2>
                 <div class="jumbotron">
+
                     <form:form method="post" action="${pageContext.request.contextPath}/ride/find" id="search-form" modelAttribute="placeForm">
+
                         <h3>From</h3>
-                        <form:select path="fromId" type="text" form="search-form">
-                            <c:forEach items="${places}" var="placeF">
-                               <form:option value="${placeF.id}">
-                                       ${placeF.name}
-                               </form:option>
-                            </c:forEach>
-                        </form:select>
+                        <form:input path="from" id="autocomplete-from" type="text" form="search-form" />
+
                         <h3>To:</h3>
-                        <form:select path="toId" type="text" form="search-form">
-                            <c:forEach items="${places}" var="placeF">
-                               <form:option value="${placeF.id}">
-                                       ${placeF.name}
-                               </form:option>
-                            </c:forEach>
-                        </form:select>
+                        <form:input path="to" id="autocomplete-to" type="text" form="search-form" />
+
                         <button type="submit">Find</button>
                     </form:form>
                 </div>
@@ -110,6 +104,24 @@
     </jsp:attribute>
     <jsp:attribute name="foot">
         <!--Load only necessary files-->
+        <script src='<c:url value="/resources/javascript/autocomplete/jquery.easy-autocomplete.min.js"/>'></script>
+        <script>
+            var dataArray = [];
+            <c:forEach items="${places}" var="placeF">
+                dataArray.push("${placeF.name}");
+            </c:forEach>
 
+            var options = {
+                data: dataArray,
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            $("#autocomplete-from").easyAutocomplete(options);
+            $("#autocomplete-to").easyAutocomplete(options);
+        </script>
     </jsp:attribute>
 </blablacar-tags:page-template>
