@@ -12,6 +12,7 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
+
 <blablacar-tags:page-template title="Ride results">
     <jsp:attribute name="head">
         <!--Load only necessary files-->

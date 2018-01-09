@@ -242,6 +242,7 @@ public class RideController {
         return "redirect:/ride/connection?placeFrom=" + placeForm.getFrom() + "&placeTo=" + placeForm.getTo();
     }
 
+
     @ModelAttribute(name = "userSession")
     public UserSession addUserSession(){
         return userSession;

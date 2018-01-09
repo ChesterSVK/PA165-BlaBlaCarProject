@@ -26,25 +26,26 @@
     <jsp:attribute name="body">
 
 
+
             <div class="jumbotron row" style="padding-bottom:0">
                 <form:form method="post" action="${pageContext.request.contextPath}/ride/find" id="search-form" modelAttribute="placeForm">
                     <div class="row">
-                    <div class="col-xs-6 background text-center">
+                      <div class="col-xs-6 background text-center">
                         <div id="background1">
                             <div class="green-shader">
                                 <h3 class="c-white">From</h3>
                                 <form:input path="from" id="autocomplete-from" type="text" form="search-form" />
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6 background text-center">
-                        <div id="background2">
-                            <div class="green-shader">
-                                <h3 class="c-white">To:</h3>
-                                <form:input path="to" id="autocomplete-to" type="text" form="search-form" />
-                            </div>
-                        </div>
-                    </div>
+                      </div>
+                      <div class="col-xs-6 background text-center">
+                          <div id="background2">
+                              <div class="green-shader">
+                                  <h3 class="c-white">To:</h3>
+                                  <form:input path="to" id="autocomplete-to" type="text" form="search-form" />
+                              </div>
+                          </div>
+                      </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -151,7 +152,6 @@
             });
 
         </script>
-
         <script src='<c:url value="/resources/javascript/autocomplete/jquery.easy-autocomplete.min.js"/>'></script>
         <script>
             var dataArray = [];
@@ -172,6 +172,5 @@
             $("#autocomplete-to").easyAutocomplete(options);
             $(".easy-autocomplete").css("margin", "0 auto");
         </script>
-
     </jsp:attribute>
 </blablacar-tags:page-template>
