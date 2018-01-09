@@ -25,23 +25,15 @@
     </jsp:attribute>
     <jsp:attribute name="body">
 
-        <nav class="navbar">
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">All rides</a>
-        </nav>
-            <div class="jumbotron row">
-                <form:form method="post" action="${pageContext.request.contextPath}/ride/find" id="search-form"
-                           modelAttribute="placeForm">
+
+            <div class="jumbotron row" style="padding-bottom:0">
+                <form:form method="post" action="${pageContext.request.contextPath}/ride/find" id="search-form" modelAttribute="placeForm">
+                    <div class="row">
                     <div class="col-xs-6 background text-center">
                         <div id="background1">
                             <div class="green-shader">
                                 <h3 class="c-white">From</h3>
-                                <form:select path="from" type="text" form="search-form">
-                                    <c:forEach items="${places}" var="placeF">
-                                        <form:option value="${placeF.id}" name="${placeF.name}">
-                                            ${placeF.name}
-                                        </form:option>
-                                    </c:forEach>
-                                </form:select>
+                                <form:input path="from" id="autocomplete-from" type="text" form="search-form" />
                             </div>
                         </div>
                     </div>
@@ -49,19 +41,24 @@
                         <div id="background2">
                             <div class="green-shader">
                                 <h3 class="c-white">To:</h3>
-                                <form:select path="to" type="text" form="search-form">
-                                    <c:forEach items="${places}" var="placeF">
-                                        <form:option value="${placeF.id}" name="${placeF.name}">
-                                            ${placeF.name}
-                                        </form:option>
-                                    </c:forEach>
-                                </form:select>
+                                <form:input path="to" id="autocomplete-to" type="text" form="search-form" />
                             </div>
                         </div>
                     </div>
-                    <button class="col-xs-12 btn btn-success" type="submit">Find</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success" type="submit" style="width: 100%; margin-top: 1%">Find</button>
+                        </div>
+                    </div>
                 </form:form>
+
+                <nav class="navbar pull-right" style="margin-top: 1%">
+                    <a class="btn btn-default" href="${pageContext.request.contextPath}/ride/list">All rides</a>
+                </nav>
+
             </div>
+
 
         <div class="jumbotron">
             <c:if test="${(fn:length(rides) eq 0)}">
@@ -139,19 +136,41 @@
         <!--Load only necessary files-->
 
         <script>
+
             $(document).ready(function () {
-                $("#background1").addClass("background-" + ($(this).find("#background1 option:selected").attr("name")));
-                $("#background2").addClass("background-" + ($(this).find("#background2 option:selected").attr("name")));
-                $("#background1 select").change(function () {
+                $("#background1").addClass("background-" + ($("#autocomplete-from").val()));
+                $("#background2").addClass("background-" + ($("#autocomplete-to").val()));
+                $("#autocomplete-from").on("change paste keyup input", function(e) {
                     $("#background1").removeClass();
-                    $("#background1").addClass("background-" + ($(this).find("option:selected").attr("name")));
+                    $("#background1").addClass("background-" + ($("#autocomplete-from").val()));
                 });
-                $("#background2 select").change(function () {
+                $("#autocomplete-to").on('change paste keyup input',function(e){
                     $("#background2").removeClass();
-                    $("#background2").addClass("background-" + ($(this).find("option:selected").attr("name")));
+                    $("#background2").addClass("background-" + ($("#autocomplete-to").val()));
                 });
             });
 
+        </script>
+
+        <script src='<c:url value="/resources/javascript/autocomplete/jquery.easy-autocomplete.min.js"/>'></script>
+        <script>
+            var dataArray = [];
+            <c:forEach items="${places}" var="placeF">
+            dataArray.push("${placeF.name}");
+            </c:forEach>
+
+            var options = {
+                data: dataArray,
+                list: {
+                    match: {
+                        enabled: true
+                    }
+                }
+            };
+
+            $("#autocomplete-from").easyAutocomplete(options);
+            $("#autocomplete-to").easyAutocomplete(options);
+            $(".easy-autocomplete").css("margin", "0 auto");
         </script>
 
     </jsp:attribute>

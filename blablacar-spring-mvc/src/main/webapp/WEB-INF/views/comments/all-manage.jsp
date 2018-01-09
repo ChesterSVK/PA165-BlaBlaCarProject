@@ -12,8 +12,7 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
-<fmt:message key = "page.welcome.title" var = "title"/>
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Manage comments">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/comment.css"  crossorigin="anonymous">

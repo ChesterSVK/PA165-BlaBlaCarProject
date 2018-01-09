@@ -38,10 +38,8 @@
                 </div>
             </div>
         </div>
-        <form:form action="${pageContext.request.contextPath}/comment/new" id="join-ride" method="get">
-            <button type="submit" class="btn btn-default" name="rideId" value="${rideDTO.id}">Add comment</button>
-        </form:form>
-        <div class="jumbotron">
+
+        <div class="jumbotron" style="margin-bottom: 1%">
             <h3>Last comments on this ride</h3>
             <c:if test="${fn:length(rideDTO.comments) eq 0}">
                 <p>No comments</p>
@@ -61,6 +59,10 @@
                 </c:forEach>
             </ul>
         </div>
+
+        <form:form action="${pageContext.request.contextPath}/comment/new" id="join-ride" method="get">
+            <button type="submit" class="btn btn-default pull-right" name="rideId" style="margin-bottom: 5%" value="${rideDTO.id}">Add comment</button>
+        </form:form>
     </jsp:attribute>
 
 
