@@ -37,20 +37,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}"><f:message key="navigation-menu.project-name"/></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">PA165 BlaBlaCar</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><blablacar-tags:a href="/"><f:message key="navigation-menu.blablacar"/></blablacar-tags:a></li>
                 <c:if test="${not empty userSession.userId}">
                     <li>
-                        <blablacar-tags:a href="/user"><f:message key="navigation-menu.starting"/></blablacar-tags:a>
+                        <blablacar-tags:a href="/user">User</blablacar-tags:a>
                     </li>
                     <c:if test="${userSession.isAdmin}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><f:message key="navigation-menu.admin"/><b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><blablacar-tags:a href="/comment/manage"><f:message key="navigation-menu.admin.comments"/></blablacar-tags:a></li>
+                            <li><blablacar-tags:a href="/comment/manage">Admin comments</blablacar-tags:a></li>
                         </ul>
                     </li>
                     </c:if>
@@ -61,7 +60,7 @@
 
                 <c:if test="${userSession.userIsLoggedIn}">
                     <li>
-                        <div class="btn btn-default" id="sign-out-btn" >Sign out</div>
+                        <a  href="#" id="sign-out-btn" >Sign out</a>
                     </li>
                 </c:if>
             </ul>

@@ -14,23 +14,26 @@
   Time: 11:17 AM
   To change this template use File | Settings | File Templates.
 --%>
-<fmt:message key="page.welcome.title" var="title"/>
-<blablacar-tags:page-template title="${title}">
+<blablacar-tags:page-template title="Welcome">
     <jsp:attribute name="head">
         <!--Load only necessary files-->
         <meta name="google-signin-client_id"
               content="332736943859-mrr2173fc1kseq1l2i4h0na68mnpmbp3.apps.googleusercontent.com">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/welcome.css"
               crossorigin="anonymous">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/style.css"
+              crossorigin="anonymous">
     </jsp:attribute>
     <jsp:attribute name="body">
-        <%--<fmt:message key="page.welcome.hello-world"/>--%>
 
-        <h1>BlaBlaCar</h1>
-        <br/>
-        <p>To continue to the app, please sign in using Gmail:</p>
 
-        <div id="sign-in-out-button" class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div class="jumbotron">
+            <h1>BlaBlaCar</h1>
+            <br/>
+            <p>To continue to the app, please sign in using Gmail:</p>
+
+            <div id="sign-in-out-button" class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
 
         <script>
         </script>
