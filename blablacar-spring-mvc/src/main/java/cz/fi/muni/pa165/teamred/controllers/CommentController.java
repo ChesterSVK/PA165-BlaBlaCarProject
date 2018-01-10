@@ -75,7 +75,7 @@ public class CommentController {
         //create
         Long id = commentFacade.createComment(comment);
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Comment " + id + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Ride was commented");
         //redirect to ride with this comment
         return "redirect:../ride/showRide/" + comment.getRideId();
     }
@@ -112,7 +112,7 @@ public class CommentController {
         for (CommentDTO comment:comments) {
 
             CommentAuthorDTO newComment = new CommentAuthorDTO(comment);
-            newComment.setAuthor(userFacade.findUserById(comment.getId()));
+            newComment.setAuthor(userFacade.findUserById(comment.getAuthorId()));
 
             displayComments.add(newComment);
         }

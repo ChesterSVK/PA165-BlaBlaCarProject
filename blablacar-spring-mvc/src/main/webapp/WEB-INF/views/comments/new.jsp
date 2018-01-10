@@ -29,7 +29,7 @@
                     <form:label path="text" cssClass="control-label">Write comment</form:label>
                     <form:errors path="text" cssClass="help-block"/>
                     <form:textarea cssClass="form-control"  form="comment-create-form" path="text" name="text" cols="30" rows="10"></form:textarea>
-                    <button type="submit">Comment</button>
+                    <button class="btn btn-default pull-right" style="margin-top:1%" type="submit">Comment</button>
                 </div>
             </form:form>
         </div>

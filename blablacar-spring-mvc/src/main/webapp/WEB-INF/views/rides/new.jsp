@@ -74,7 +74,7 @@
                         <form:errors path="seatsAvailable" cssClass="help-block"/>
                     </div>
 
-                    <button type="submit" class="btn btn-default">Create ride</button>
+                    <button type="submit" class="btn btn-default pull-right" style="margin-top:1%; margin-right:15px;">Create ride</button>
                 </div>
             </form:form>
         </div>

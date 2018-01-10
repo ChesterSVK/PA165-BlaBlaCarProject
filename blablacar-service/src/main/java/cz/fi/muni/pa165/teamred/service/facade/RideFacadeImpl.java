@@ -70,8 +70,12 @@ public class RideFacadeImpl implements RideFacade {
 
     @Override
     public void deleteRide(Long rideId) {
-        Ride ride = new Ride();
-        ride.setId(rideId);
+        Ride ride = rideService.findById(rideId);
+
+        if(ride == null) {
+            throw new IllegalArgumentException();
+        }
+
         rideService.deleteRide(ride);
     }
 

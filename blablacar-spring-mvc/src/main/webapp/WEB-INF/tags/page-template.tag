@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
     <jsp:invoke fragment="head"/>
 </head>
-<body>
+<body style="background-color: #e8fced!important;">
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
@@ -40,10 +40,10 @@
             <a class="navbar-brand" href="${pageContext.request.contextPath}">PA165 BlaBlaCar</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="float: none;">
                 <c:if test="${not empty userSession.userId}">
                     <li>
-                        <blablacar-tags:a href="/user">User</blablacar-tags:a>
+                        <blablacar-tags:a href="/user">Home</blablacar-tags:a>
                     </li>
                     <c:if test="${userSession.isAdmin}">
                     <li class="dropdown">
@@ -53,13 +53,13 @@
                         </ul>
                     </li>
                     </c:if>
-                    <li>
+                    <li class="pull-right">
                         <blablacar-tags:a href="/user/user-details">Logged in as: ${userSession.user.name}</blablacar-tags:a>
                     </li>
                 </c:if>
 
                 <c:if test="${userSession.userIsLoggedIn}">
-                    <li>
+                    <li class="pull-right">
                         <a  href="#" id="sign-out-btn" >Sign out</a>
                     </li>
                 </c:if>
@@ -110,10 +110,11 @@
     <!-- page body -->
     <jsp:invoke fragment="body"/>
 
+    <div style="width:100%; height:1px; padding-bottom: 30px;"></div>
 
     <!-- footer -->
-    <footer class="footer">
-        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
+    <footer class="footer" style="position: fixed; right: 0; bottom: 0; left: 0; padding: 1rem; background-color: #333; color: #9d9d9d;">
+        <p style="margin:0">&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
     </footer>
 </div>
 <!-- javascripts placed at the end of the document so the pages load faster -->
