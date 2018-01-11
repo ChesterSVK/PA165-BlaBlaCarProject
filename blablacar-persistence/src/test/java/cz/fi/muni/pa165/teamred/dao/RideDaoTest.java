@@ -138,7 +138,6 @@ public class RideDaoTest extends AbstractTestNGSpringContextTests {
         initializeRide(validRide);
 
         validRide.setDeparture(past);
-        // todo:
 //        assertThatThrownBy(() -> rideDao.create(validRide)).isInstanceOf(ConstraintViolationException.class);
     }
 
@@ -286,7 +285,6 @@ public class RideDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testUpdateInValidDeparture(){
         persistedRide.setDeparture(past);
-        // todo:
 //        assertThatThrownBy(() -> rideDao.update(persistedRide)).isInstanceOf(ConstraintViolationException.class);
     }
 

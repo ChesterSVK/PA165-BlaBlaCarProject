@@ -41,7 +41,7 @@
                     <td>FROM</td>
                     <td>TO</td>
                     <td>SEATS</td>
-                    <td>PRIZE</td>
+                    <td>PRICE</td>
                 </tr>
                 </thead>
                 <c:forEach var="ride" items="${rides}">

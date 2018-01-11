@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//TODO: LIST URL WITH ONLY ADMIN ACCESS
 @WebFilter(urlPatterns = {"/comment/manage","/comment/delete"})
 public class AdminFilter implements Filter {
 

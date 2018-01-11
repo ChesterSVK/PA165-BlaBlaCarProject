@@ -203,9 +203,31 @@ public class PlaceFacadeImpl implements PlaceFacade {
                 (destinationPlace == null || destinationPlace.isEmpty())) {
             throw new IllegalArgumentException();
         } else if (originatingPlace == null || originatingPlace.isEmpty()) {
-            //TODO: Get with destination
+
+            Place destPlace = placeService.findByName(destinationPlace);
+
+            if (destPlace == null) {
+                log.debug("Place with name(" + destinationPlace + ") has not been found");
+                return null;
+            }
+
+            log.debug("Place with id(" + destPlace.getId() + ") has been retrieved");
+
+            return beanMappingService.mapTo(destPlace.getDestinationRides(), RideDTO.class);
+
         } else if (destinationPlace == null || destinationPlace.isEmpty()) {
-            //TODO: Get with origin
+
+            Place originPlace = placeService.findByName(originatingPlace);
+
+            if (originPlace == null) {
+                log.debug("Place with name(" + originatingPlace + ") has not been found");
+                return null;
+            }
+
+            log.debug("Place with id(" + originPlace.getId() + ") has been retrieved");
+
+            return beanMappingService.mapTo(originPlace.getOriginatingRides(), RideDTO.class);
+
         }
 
         log.debug("facade getRidesWithOriginatingAndDestinationPlaceByName({})", originatingPlace, destinationPlace);

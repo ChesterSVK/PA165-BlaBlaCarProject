@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * @author Erik Horváth
  */
-// todo: exception handling
 public interface CommentFacade {
     /**
      * Creates comment
